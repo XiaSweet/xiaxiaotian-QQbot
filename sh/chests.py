@@ -21,4 +21,10 @@ with open("mykey.txt") as f:
                 )
     response = urllib.request.urlopen(request).read().decode("utf-8")
        
-    print (response)  
+    data = json.loads(response)
+    
+    for item in data["items"]:
+                    print("宝箱位置：%s\n宝箱名称：%d\n" % (
+                                    item["index"], 
+                                    item["name"]
+                            ))
