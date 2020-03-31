@@ -2,6 +2,7 @@
 import urllib.request
 import json
 import ssl
+import os
 
 with open("mykey.txt") as f:
     mykey=f.read().rstrip("\n")
@@ -23,8 +24,14 @@ with open("mykey.txt") as f:
        
     data = json.loads(response)
     
+    os.system("python3 hello-user.py")    
+
+    print('部落战情况如下所示（信息可能较长，敬请谅解QaQ）：')
+
+    print(  )
+
     for item in data["participants"]:
-                    print("成员名称：%s\n战斗日次数：%d\n已打次数：%s\n胜利次数：%s\n集卡日次数：%s\n " % (
+                    print("成员名称:%s , 战斗日次数:%d次\n已打次数:%s次 , 胜利次数：%s次 , 已打集卡日：%s次" % (
                                     item["name"], 
                                     item["numberOfBattles"],
                                     item["battlesPlayed"],

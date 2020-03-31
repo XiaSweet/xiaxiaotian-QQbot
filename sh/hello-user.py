@@ -21,4 +21,8 @@ with open("mykey.txt") as f:
                 )
     response = urllib.request.urlopen(request).read().decode("utf-8")
        
-    print (response)  
+    data = json.loads(response)
+    
+    user = (data["name"])
+                                        
+    print('欢迎您，敬爱的:',(user))
