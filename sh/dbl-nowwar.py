@@ -10,7 +10,7 @@ with open("mykey.txt") as f:
     
     base_url = "https://api.clashroyale.com/v1"
      
-    endpoint = "/clans/%2388GUJ80/warlog"
+    endpoint = "/clans/%2388GUJ80/currentwar"
     
     request = urllib.request.Request(
                    base_url+endpoint,
@@ -23,9 +23,11 @@ with open("mykey.txt") as f:
        
     data = json.loads(response)
     
-    for item in data["items"]:
-                    print("成员名称：%s\n奖杯：%d\n竞技场：%s\n " % (
-                                    item["wins"], 
-                                    item["name"],
-                                    item["battlesPlayed"]
+    for item in data["participants"]:
+                    print("成员名称：%s\n战斗日次数：%d\n已打次数：%s\n胜利次数：%s\n集卡日次数：%s\n " % (
+                                    item["name"], 
+                                    item["numberOfBattles"],
+                                    item["battlesPlayed"],
+                                    item["wins"],
+                                    item["collectionDayBattlesPlayed"]
                             ))
