@@ -3,6 +3,12 @@ import urllib.request
 import json
 import ssl
 import os
+import argparse
+
+#外部函数引入
+parser = argparse.ArgumentParser(description='CR宝箱查询程序')
+parser.add_argument('--usertag','-u',help='你的Tag')
+args = parser.parse_args()
 
 with open("mykey.txt") as f:
     mykey=f.read().rstrip("\n")
@@ -11,10 +17,14 @@ with open("mykey.txt") as f:
     
     base_url = "https://api.clashroyale.com/v1"
      
-    endpoint = "/players/%23Y98V0RQR/upcomingchests"
+    endpoint = "/players/%23"
+
+    tag = (args.usertag)
+
+    chests = "/upcomingchests"
     
     request = urllib.request.Request(
-                   base_url+endpoint,
+                   base_url+endpoint+tag+chests,
                    None,
                    {
                             "Authorization":"Bearer %s" % mykey
@@ -24,7 +34,7 @@ with open("mykey.txt") as f:
        
     data = json.loads(response)
 
-    os.system("python3 hello-user.py")
+    os.system("python3 hello-user.py -t %s"%(args.usertag))
 
     print('以下是您的未来可以获得的宝箱哦Ovo：')
 
