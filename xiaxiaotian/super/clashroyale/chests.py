@@ -10,7 +10,7 @@ parser = argparse.ArgumentParser(description='CR宝箱查询程序')
 parser.add_argument('--usertag','-u',help='你的Tag')
 args = parser.parse_args()
 
-with open("mykey.txt") as f:
+with open("xiaxiaotian/super/clashroyale/mykey.txt") as f:
     mykey=f.read().rstrip("\n")
     
     ssl._create_default_https_context = ssl._create_unverified_context
@@ -34,11 +34,10 @@ with open("mykey.txt") as f:
        
     data = json.loads(response)
 
-    os.system("python3 hello-user.py -t %s"%(args.usertag))
 
-    print('以下是您的未来可以获得的宝箱哦Ovo：')
+    os.system("python3 xiaxiaotian/super/clashroyale/hello-user.py -t %s"%(args.usertag))
 
-    print( )
+    print('以下是您未来可以获得的宝箱Ovo：')
     
     for item in data["items"]:
                     chest = ("宝箱位置:+%s,宝箱名称:%s" % (
@@ -54,3 +53,4 @@ with open("mykey.txt") as f:
                     chest = chest.replace('Epic Chest','史诗宝箱')
                     chest = chest.replace('+0','下一场胜利')
                     print (chest)
+    print('如需帮助请发送[help]指令哦')

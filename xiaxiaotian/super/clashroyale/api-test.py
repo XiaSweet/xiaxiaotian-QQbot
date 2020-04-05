@@ -10,7 +10,7 @@ with open("mykey.txt") as f:
     
     base_url = "https://api.clashroyale.com/v1"
      
-    endpoint = "/players/%23Y98V0RQR"
+    endpoint = "/clans/%232YYUYCG/currentwar"
     
     request = urllib.request.Request(
                    base_url+endpoint,

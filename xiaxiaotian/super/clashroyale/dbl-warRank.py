@@ -11,7 +11,7 @@ parser.add_argument('--clantag', '-c', help='填写你的部落Tag，必需')
 parser.add_argument('--usertag','-u',help='你的Tag')
 args = parser.parse_args()
 
-with open("mykey.txt") as f:
+with open("xiaxiaotian/super/clashroyale/mykey.txt") as f:
     mykey=f.read().rstrip("\n")
     
     ssl._create_default_https_context = ssl._create_unverified_context
@@ -35,21 +35,20 @@ with open("mykey.txt") as f:
        
     data = json.loads(response)
 
-    os.system('python3 hello-user.py -t %s ' %(args.usertag))
+    #os.system('python3 hello-user.py -t %s ' %(args.usertag))
  
-    print('部落战信息如下所示：')
-
-    print( )
+    print('你好，部落战排名如下所示：')
 
     for item in data["clans"]:
-                    war = ("部落名称：%s,部落杯数：%d\n胜利次数：%s,参战人数：%s,战斗日未打次数：%s" %
+                    war = ("部落Tag:%s,部落名称:%s,部落杯数:%d\n胜利次数:%d次,参战人数:%s人,战斗日已打:%s次" %
                              (
+                                    item["tag"],                                    
                                     item["name"], 
                                     item["clanScore"],
                                     item["wins"],
                                     item["participants"],
                                     item["battlesPlayed"]
-                                              )
+                               )
                          )
                     lists = "battlesPlayed"
 #                    a=sorted(lists.items(),key=lambda e:e[1],reverse=True)  //j技术还是不到家，有空还算继续恶补恶补Python吧QaQ
