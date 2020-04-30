@@ -1,7 +1,9 @@
 # 夏小甜 -CR宝箱查询插件
 
-一个使用Python简单查询游戏“皇室战争”的宝箱QQ机器人。以“夏小甜”为核心已经部署在CR部落"皇家.部落"的QQ群内。基于CoolQ机器人Nonebot组件制作  
+一个使用Python简单查询游戏“皇室战争”的宝箱QQ机器人。以“夏小甜”为核心已经部署在CR部落"皇家.部落"的QQ群内。基于CoolQ机器人Nonebot组件制作 
+
 ## 配置要求
+
 您的设备只需满足一下要求即可运行这个插件：
 操作系统: 
 Linux（Debian 8/CentOS 7 均可，必须能够运行最新版Docker） 或 Windows  7 Service Pack 1 以上
@@ -15,7 +17,9 @@ Python: V3.7+ （用于保证Nonebot可以运行以及查询插件的使用）
 根据您的操作系统可能还需要一下组件:
 Docker(**仅LINUX**): 最新版  （用于兼容CoolQ软件的运行）
 
+
 ## 使用方法
+
 1. 在CoolQ中启用 CoolQ-HTTP-API 插件。
 2. 使用PiP3安装 NoneBot 最新版。
  Linux:`pip3 install nonebot`
