@@ -1,15 +1,11 @@
 from nonebot import on_command, CommandSession
 import os
-import sys
 import subprocess
 
 #Powered by XiaSweet Labs
 #宝箱查询实用程序 -CR皇室战争
 #本源码来自NoneBot，感谢作者的辛苦付出
 #Nonebot https://nonebot.cqp.moe/
-
-#连接脚本目录
-sys.path.append('xiaxiaotian/super/clashroyale')
 
 # on_command 装饰器将函数声明为一个命令处理器
 # 这里 nextchest 为命令的名字（可为不冲突的任意值），同时允许使用别名「宝箱查询」
