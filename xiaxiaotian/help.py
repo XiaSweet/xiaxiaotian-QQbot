@@ -2,13 +2,13 @@ from nonebot import on_command, CommandSession
 from nonebot import on_natural_language, NLPSession, IntentCommand
 import time
 #填写版本号，算是我微小的请求啦\(^o^)/~
-ver = "1.3-github"
+ver = "1.4.3-alpha"
 year = time.strftime("%Y", time.localtime()) 
 
 help_text = "1.“帮助信息”请发送[bxh]\n2.“部落战信息”请发送[blzh]\n3.发送[helpme]获取隐私保护与投诉指引\n"
-banbenhao = "\n版本信息:\n夏小甜超能力 - CR宝箱查询插件\n版本号:%s\n"%(ver)
-blog = "友人帐:\n秘密基地(仅限内网)：https://notes.xiasweet.com \n夏小甜的Github:https://github.com/XiaSweet/xiaxiaotian-searchCRlog \n以及所有皇室战争“皇家.部落”里的所有提出建议的伙伴（*＾-＾*）\n"
-gpl = "温馨提示：夏小甜使用AGPL3.0协议，您可以在无偿开放修改的源代码并注明作者的情况下自由的修改源码。\n2019-%s By XiaSweet Lab "%(year)
+banbenhao = "\n版本信息:\n夏小甜 - CR辅助机器人\n版本号:%s\n"%(ver)
+blog = "友情感谢:\n秘密基地(仅限内网)：https://notes.xiasweet.com \n夏小甜的Github:https://github.com/XiaSweet/xiaxiaotian-searchCRlog \n以及所有皇室战争“皇家.部落”里的所有提出建议的伙伴（*＾-＾*）\n"
+gpl = "温馨提示：夏小甜使用AGPL3.0协议，您可以在无偿开放修改的源代码并注明作者的情况下自由的修改源码。\n2019-%s By XiaSweet Lab  纪念每一位部落的小伙伴OvO"%(year)
 #宝箱查询帮助
 bxcx = "宝箱查询是为了帮助大家了解后续出现的宝箱而制作的小程序 \n食用方法： \n向夏小甜发送[宝箱查询+空格+你的游戏Tag]等待回复即可\n"
 bxcxq = "常见问题解答：\n"

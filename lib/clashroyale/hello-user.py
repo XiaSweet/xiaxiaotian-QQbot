@@ -10,7 +10,7 @@ parser.add_argument('--tag', '-t', help='输入你的CR游戏Tag属性，必要�
 args = parser.parse_args()
 
 
-with open("xiaxiaotian/clashroyale/mykey.txt") as f:
+with open("lib/clashroyale/mykey.txt") as f:
     mykey=f.read().rstrip("\n")
     
     ssl._create_default_https_context = ssl._create_unverified_context

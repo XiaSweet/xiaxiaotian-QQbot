@@ -1,4 +1,5 @@
 from nonebot.default_config import *
+from datetime import timedelta
 
 SUPERUSERS = {1172608638}
 COMMAND_START = {'', '/', '!', '／', '！'}
@@ -10,3 +11,5 @@ SESSION_CANCEL_EXPRESSION = (
     '好吧，那就不打扰啦╭(╯^╰)╮',
     '那夏小甜先不打扰你啦。',
 )
+SESSION_RUN_TIMEOUT = timedelta(seconds=10)
+DEFAULT_VALIDATION_FAILURE_EXPRESSION = '你发送的内容格式不太对呢，请检查一下再发送哦～'

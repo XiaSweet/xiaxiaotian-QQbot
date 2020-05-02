@@ -5,6 +5,6 @@ import subprocess
 async def get_nextchest_of_tag(tag: str) -> str:
 
     # subprocess.getoutput是用于执行脚本并输出结果的
-    users = subprocess.getoutput("python3 xiaxiaotian/clashroyale/chests.py -u %s"%(tag))
+    users = subprocess.getoutput("python3 lib/clashroyale/chests.py -u %s"%(tag))
     # 向用户返回的信息（这里是脚本内容）
     return f'{users}'
