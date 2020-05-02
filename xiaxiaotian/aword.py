@@ -7,7 +7,7 @@ import subprocess
 
 # on_command 装饰器将函数声明为一个命令处理器
 # 这里 achat 为命令的名字（可为不冲突的任意值），同时允许使用别名「跟我聊天」
-@on_command('achat',only_to_me=True)
+@on_command('achat',aliases=('一言'),only_to_me=True)
 async def achat(session: CommandSession):
     # 获取信息
     aword = session.get('aword')
@@ -29,9 +29,9 @@ async def _(session: CommandSession):
 async def get_achat_of_chat(aword: str) -> str:
 
     # subprocess.getoutput是用于执行脚本并输出结果的
-    hfchat = subprocess.getoutput("python3 lib/yiyan/aword.py"
+    onechat = subprocess.getoutput("python3 lib/yiyan/aword.py"
     # 向用户返回的信息（这里是脚本内容）
-    return f'{hfchat}'
+    return f'{onechat}'
 
     
 # on_natural_language 装饰器将函数声明为一个自然语言处理器
