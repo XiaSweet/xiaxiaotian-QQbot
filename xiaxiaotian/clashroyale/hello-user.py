@@ -10,7 +10,7 @@ parser.add_argument('--tag', '-t', help='输入你的CR游戏Tag属性，必要�
 args = parser.parse_args()
 
 
-with open("xiaxiaotian/super/clashroyale/mykey.txt") as f:
+with open("xiaxiaotian/clashroyale/mykey.txt") as f:
     mykey=f.read().rstrip("\n")
     
     ssl._create_default_https_context = ssl._create_unverified_context
@@ -34,4 +34,4 @@ with open("xiaxiaotian/super/clashroyale/mykey.txt") as f:
     
     user = (data["name"])
                                         
-    print('欢迎您，敬爱的:',(user))
+    print('\n欢迎您，敬爱的:',(user))
