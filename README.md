@@ -25,7 +25,7 @@
 Linux:`pip3 install nonebot`
 3. Git Clone查询插件最新版到你的电脑，然后配置你的 CoolQ-HTTP-API 插件与夏小甜机器人连接并使用`echo`指令测试是否连接成功。
 4. 进入"皇室战争"游戏的官方[开发者](https://developer.clashroyale.com/ "开发者")页面申请一个查询API。
-5. 将你申请的API填入到"夏小甜的插件目录/xiaxiaotian/super/clashroyale/mykey.txt"中
+5. 将你申请的API填入到"夏小甜的插件目录/xiaxiaotian/super/clashroyale/mykey.txt"中  
 6.使用python3.7运行目录下的"bot-start.py"等待初始化成功。
 7. 向你的机器人发送“宝箱查询+空格+你要查询宝箱的用户名TAG”，如果运行正常的话稍后你便会收到机器人发送给你的宝箱查询信息啦(。・∀・)ノ
 
