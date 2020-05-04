@@ -40,4 +40,5 @@ async def get_aichat_of_chat(chat: str) -> str:
 @on_natural_language(keywords=None,only_to_me=True)
 async def _(session: NLPSession):
     # 返回意图命令，前两个参数必填，分别表示置信度和意图命令名
-    return IntentCommand(60.0, 'aichat')
+    # 确保任何消息都在且仅在其它自然语言处理器无法理解的时候使用 aichat 命令
+    return IntentCommand(60.0, 'aichat', args={'chat': session.msg_text})

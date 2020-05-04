@@ -28,11 +28,9 @@ except urllib.error.HTTPError as e:
 else:
     #读取json
     data = json.loads(response)
-    onechat =('来自远方的留言：\n %s 出自%s \n 从这里寄出：https://hitokoto.cn?%s=[%s]'%(
+    onechat =('来自远方的留言：\n%s\n出自%s '%(
                                 data['hitokoto'],
-                                data['from'],
-                                data['uuid'],
-                                data['uuid']
+                                data['from']
                                 )
                                )
     print (onechat)
