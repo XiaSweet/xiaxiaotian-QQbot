@@ -33,22 +33,26 @@ with open("lib/clashroyale/mykey.txt") as f:
                             "Authorization":"Bearer %s" % mykey
                    }
                 )           
-    #检查HTTP错误
+    #检查HTTP错误，并设置超时机制
     try:            
-        response = urllib.request.urlopen(request).read().decode("utf-8")
+        response = urllib.request.urlopen(request,timeout=1.8).read().decode("utf-8")
     #如果出现HTTP错误
     except urllib.error.HTTPError as e:
         code = (e.code)
         if 404:
-            print('\n你想查询的用户被抓到二次元了，请检查一下再重新发送指令查询吧(⊙﹏⊙)\n错误提示:无法从官方查询您的TAG,请确保没有中文输入或遗漏再尝试查询吧\n错误代码:0 - GF%s' %(code) )
+            print('出现意外了：\n你想查询的用户被抓到二次元了，请检查一下再重新发送指令查询吧(⊙﹏⊙)\n错误提示:无法从官方查询您的TAG,请确保没有中文输入或遗漏再尝试查询吧\n错误代码:0 - GF%s' %(code) )
             exit
         elif 400:
-            print('\n额。。。。QAQ听不懂官方说的话，请联系管理员提供错误提示协助修复吧\n错误提示:没有使用正确的查询地址或官方关闭API了，或许也倒闭了吧( •̀ ω •́ )y\n错误代码：1 - GF%s'%(code))
+            print('Qaq:\n额。。。。QAQ听不懂官方说的话，请联系管理员提供错误提示协助修复吧\n错误提示:没有使用正确的查询地址或官方关闭API了，或许也倒闭了吧( •̀ ω •́ )y\n错误代码：1 - GF%s'%(code))
         elif 403:
-            print('\nemmm( •̀ ω •́ )我好像打不开门，请联系管理员协助修复吧\n错误提示：钥匙不正确，通常是公网IP地址变更导致的失效情况在家用宽带中较常见.您无法独自修复这个错误，请联系管理员协助吧\n错误代码:2 - GF%s'%(code))
+            print('出现意外了：\nemmm( •̀ ω •́ )我好像打不开门，请联系管理员协助修复吧\n错误提示：钥匙不正确，通常是公网IP地址变更导致的失效情况在家用宽带中较常见.您无法独自修复这个错误，请联系管理员协助吧\n错误代码:2 - GF%s'%(code))
+    #超时反馈信息
+    except Exception as e:
+        print("出现意外了：\n因为连接速度太慢所以主动放弃查询了，请您重新使用指令再查询一下吧")
+        exit
     #如果出现中文
     except UnicodeEncodeError:
-        print("\n对不起，我可能搞错了，你似乎不是来查询宝箱的(。﹏。)\n错误提示：您可以无视这条指令，如果你是想查询宝箱而收到这条指令检查是否有中文字符(⊙o⊙)哦.\n错误代码:3 - Not Call Me")
+        print("啊哦：\n对不起，我可能搞错了，你似乎不是来查询宝箱的(。﹏。)\n错误提示：您可以无视这条指令，如果你是想查询宝箱而收到这条指令检查是否有中文字符(⊙o⊙)哦.\n错误代码:3 - Not Call Me")
         exit
     #没有出现HTTP错误
     else:   
@@ -72,7 +76,6 @@ with open("lib/clashroyale/mykey.txt") as f:
                     chest = chest.replace('Epic Chest','史诗宝箱')
                     chest = chest.replace('+0','下个宝箱')
                     print (chest)
-        print('如需帮助请发送[help]指令哦')
     
     
 

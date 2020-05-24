@@ -3,6 +3,9 @@ from nonebot import on_natural_language, NLPSession, IntentCommand
 #加载基础组件
 import subprocess
 #注意：用户的想说的话在这里的变量是'aword'
+#日志记录模块
+import logging
+from nonebot.log import logger
 
 
 # on_command 装饰器将函数声明为一个命令处理器
@@ -10,20 +13,14 @@ import subprocess
 @on_command('achat',aliases=('一言'),only_to_me=True)
 async def achat(session: CommandSession):
     # 获取信息
+    logger.info('[一言]用户激活指令开始运行')
     aword = session.get('aword')
     # 向脚本发送API请求
+    logger.debug('[一言]向编译库发送请求获取信息')
     achat_report = await get_achat_of_chat(aword)
     # 向用户发送回复信息
+    logger.info('[一言]向用户发送运行结果，任务结束')
     await session.send(achat_report,at_sender=True)
-
-
-# achat.args_parser 装饰器将函数声明为 achat 命令的参数解析器
-# 命令解析器用于将用户输入的参数解析成命令真正需要的数据
-@achat.args_parser
-async def _(session: CommandSession):
-    # 去掉消息首尾的空白符和混淆注释号’#’
-    stripped_arg = session.current_arg_text.strip(' ')
-    stripped_arg = session.current_arg_text.strip('#')
  
 #开始运行命令
 async def get_achat_of_chat(aword: str) -> str:
@@ -40,4 +37,4 @@ async def get_achat_of_chat(aword: str) -> str:
 @on_natural_language(keywords={'一言'},only_to_me=True)
 async def _(session: NLPSession):
     # 返回意图命令，前两个参数必填，分别表示置信度和意图命令名
-    return IntentCommand(70.0, 'achat')
+    return IntentCommand(70.0, 'achat',args={'aword': session.msg_text.replace(' ','')})

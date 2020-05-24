@@ -41,7 +41,7 @@ async def address(session: CommandSession):
     except:
         print("bxh send error!")
 
-@on_command('部落战信息', aliases=('bxh'))
+@on_command('部落战信息', aliases=('blzh'))
 async def address(session: CommandSession):
     try:
         await session.send(blzh1+blzh2+blzh3+blzh4+blzh5, ignore_failure=False,at_sender=True)

@@ -2,6 +2,10 @@ from nonebot import on_command, CommandSession
 from nonebot import on_natural_language, NLPSession, IntentCommand
 #回复相应信息
 from .data_source import get_nextchest_of_tag
+#日志记录模块
+import logging
+from nonebot.log import logger
+
 
 #Powered by XiaSweet Labs
 #宝箱查询实用程序 -CR皇室战争
@@ -18,6 +22,7 @@ async def nextchest(session: CommandSession):
     nextchest_report = await get_nextchest_of_tag(tag)
     # 向用户发送宝箱信息
     await session.send(nextchest_report,at_sender=True)
+    logger.info('[宝箱查询]收到运行结果直接反馈给用户,任务结束')
 
 
 # nextchest.args_parser 装饰器将函数声明为 nextchest 命令的参数解析器
@@ -28,20 +33,24 @@ async def _(session: CommandSession):
     stripped_arg = session.current_arg_text.strip()
     stripped_arg = session.current_arg_text.strip('#')
     if session.is_first_run:
+        logger.info('[宝箱查询]第一次进入程序，开始分析')
         # 该命令第一次运行（第一次进入命令会话）
         if stripped_arg:
             # 第一次运行参数不为空，意味着用户直接将游戏Tag跟在命令名后面，作为参数传入
             # 例如用户可能发送了：宝箱查询 '查询Tag'
             session.state['tag'] = stripped_arg
+            logger.info('[宝箱查询]用户第一次输入不为空，作为参数传入')
         return
 
     if not stripped_arg:
         # 用户没有发送有效的名称（而是发送了空白字符），则提示重新输入
         # 这里 session.pause() 将会发送消息并暂停当前会话（该行后面的代码不会被运行）
+        logger.info('[宝箱查询]用户没有输入正确的TAG，重新询问')
         session.pause('您的TAG似乎不对，再试试吧',at_sender=True)
         handle_cancellation(session)
 
     # 如果当前正在向用户询问更多信息（例如本例中的要查询的TAG），且用户输入有效，则放入会话状态
+    logger.info('[宝箱查询]收到了非空白的用户TAG，转接查询实用程序')
     session.state[session.current_key] = stripped_arg
 
 # on_natural_language 装饰器将函数声明为一个自然语言处理器
