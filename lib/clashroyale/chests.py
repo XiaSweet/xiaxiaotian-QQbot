@@ -40,19 +40,19 @@ with open("lib/clashroyale/mykey.txt") as f:
     except urllib.error.HTTPError as e:
         code = (e.code)
         if 404:
-            print('出现意外了：\n你想查询的用户被抓到二次元了，请检查一下再重新发送指令查询吧(⊙﹏⊙)\n错误提示:无法从官方查询您的TAG,请确保没有中文输入或遗漏再尝试查询吧\n错误代码:0 - GF%s' %(code) )
+            print('ERROR-CR404')
             exit
         elif 400:
-            print('Qaq:\n额。。。。QAQ听不懂官方说的话，请联系管理员提供错误提示协助修复吧\n错误提示:没有使用正确的查询地址或官方关闭API了，或许也倒闭了吧( •̀ ω •́ )y\n错误代码：1 - GF%s'%(code))
+            print('ERROR-CR400')
         elif 403:
-            print('出现意外了：\nemmm( •̀ ω •́ )我好像打不开门，请联系管理员协助修复吧\n错误提示：钥匙不正确，通常是公网IP地址变更导致的失效情况在家用宽带中较常见.您无法独自修复这个错误，请联系管理员协助吧\n错误代码:2 - GF%s'%(code))
+            print('ERROR-CR403')
     #超时反馈信息
     except Exception as e:
-        print("出现意外了：\n因为连接速度太慢所以主动放弃查询了，请您重新使用指令再查询一下吧")
+        print("ERROR-CRTimeOut")
         exit
     #如果出现中文
     except UnicodeEncodeError:
-        print("啊哦：\n对不起，我可能搞错了，你似乎不是来查询宝箱的(。﹏。)\n错误提示：您可以无视这条指令，如果你是想查询宝箱而收到这条指令检查是否有中文字符(⊙o⊙)哦.\n错误代码:3 - Not Call Me")
+        print("ERROR-CRNotCallMe")
         exit
     #没有出现HTTP错误
     else:   
@@ -62,7 +62,7 @@ with open("lib/clashroyale/mykey.txt") as f:
         #返回正确的用户信息
         print('以下是您未来可以获得的宝箱Ovo：')
     
-        for item in data["items"]:
+        for item in data ["items"]:
                     chest = ("宝箱位置:+%s,宝箱名称:%s" % (
                                     item["index"], 
                                     item["name"]

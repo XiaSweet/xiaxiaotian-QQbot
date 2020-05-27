@@ -18,7 +18,7 @@ from nonebot.log import logger
 async def aichat(session: CommandSession):
     # 获取可选参数，这里如果没有 message 参数，命令不会被中断，message 变量会是 None
     chat = session.state.get('chat')
-
+    logger.info('[腾讯闲聊]指令被触发了，开始运行')
     # 通过封装的函数获取图灵机器人的回复
     aichat_re = await call_txai_api(chat)
        
@@ -36,7 +36,7 @@ async def _(session: CommandSession):
 async def call_txai_api(chat: str) -> str:
     logger.info('[腾讯闲聊]开始像脚本发送变量并尝试获取回复')
     # subprocess.getoutput是用于执行脚本并输出结果的
-    hfchat = subprocess.getoutput("python3 lib/txai_chat/chat.py -c %s"%(chat))
+    hfchat = subprocess.getoutput("python3 lib/txai_chat/chat.py -c '%s'"%(chat))
     if hfchat == 'ERROR4':
         logger.info('[腾讯闲聊]出现错误了，代码:4 - TXAI16394')
         logger.info('[腾讯闲聊]指令出现错误并结束')
@@ -48,8 +48,7 @@ async def call_txai_api(chat: str) -> str:
     elif hfchat == 'ERROR5':
         logger.info('[腾讯闲聊]出现错误了，代码:5 - TXAI16394')
         logger.info('[腾讯闲聊]小提醒：您无法独自解决本问题，请联系管理员协助您处理吧')
-        logger.info('[腾讯闲聊]指令出现错误并结束')
-        
+        logger.info('[腾讯闲聊]指令出现错误并结束')    
         return f'因为小管家意外受伤了，请呼唤管理员来拯救吧'
     else: 
         # 向用户返回的信息（这里是脚本内容）
@@ -65,4 +64,4 @@ async def call_txai_api(chat: str) -> str:
 async def _(session: NLPSession):
     # 返回意图命令，前两个参数必填，分别表示置信度和意图命令名
     # 确保任何消息都在且仅在其它自然语言处理器无法理解的时候使用 aichat 命令
-    return IntentCommand(60.0, 'aichat', args={'chat': session.msg_text.replace(' ','')})
+    return IntentCommand(60.0, 'aichat', args={'chat': session.msg_text.replace(' ','+')})

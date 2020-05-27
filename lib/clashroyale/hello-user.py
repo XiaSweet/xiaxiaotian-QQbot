@@ -34,4 +34,4 @@ with open("lib/clashroyale/mykey.txt") as f:
     
     user = (data["name"])
                                         
-    print('你好,敬爱的 Mouster\n您查询的用户是:',(user))
+    print('Hello,My Mouster\n您查询的用户是:',(user))

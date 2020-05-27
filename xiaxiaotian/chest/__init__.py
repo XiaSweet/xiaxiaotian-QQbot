@@ -17,21 +17,22 @@ from nonebot.log import logger
 @on_command('nextchest', aliases=('宝箱查询','查宝箱'),only_to_me=False)
 async def nextchest(session: CommandSession):
     # 从会话状态（session.state）中获取游戏Tag（tag），如果当前不存在，则询问用户
-    tag = session.get('tag', prompt='请回复您的游戏TAG并@我(⊙o⊙)哦。',at_sender=True,only_to_me=True)
+    tag = session.get('tag', prompt='请回复您的游戏TAG哦。',at_sender=True,only_to_me=True)
     # 向脚本发送API请求
     nextchest_report = await get_nextchest_of_tag(tag)
     # 向用户发送宝箱信息
     await session.send(nextchest_report,at_sender=True)
-    logger.info('[宝箱查询]收到运行结果直接反馈给用户,任务结束')
+    logger.info('[宝箱查询]结果已反馈用户,任务结束')
 
 
 # nextchest.args_parser 装饰器将函数声明为 nextchest 命令的参数解析器
 # 命令解析器用于将用户输入的参数解析成命令真正需要的数据
 @nextchest.args_parser
 async def _(session: CommandSession):
-    # 去掉消息首尾的空白符和混淆注释号’#’
-    stripped_arg = session.current_arg_text.strip()
-    stripped_arg = session.current_arg_text.strip('#')
+    logger.debug('[宝箱查询]开始过滤无效字符')
+    # 去掉消息的空白符和混淆注释号’#’
+    stripped_arg = session.current_arg_text.replace(' ','')
+    stripped_arg = session.current_arg_text.replace('#','')
     if session.is_first_run:
         logger.info('[宝箱查询]第一次进入程序，开始分析')
         # 该命令第一次运行（第一次进入命令会话）
@@ -39,7 +40,7 @@ async def _(session: CommandSession):
             # 第一次运行参数不为空，意味着用户直接将游戏Tag跟在命令名后面，作为参数传入
             # 例如用户可能发送了：宝箱查询 '查询Tag'
             session.state['tag'] = stripped_arg
-            logger.info('[宝箱查询]用户第一次输入不为空，作为参数传入')
+            logger.info('[宝箱查询]用户第一次输入不为空，作为参数传入并执行查询脚本')
         return
 
     if not stripped_arg:
@@ -56,7 +57,7 @@ async def _(session: CommandSession):
 # on_natural_language 装饰器将函数声明为一个自然语言处理器
 # keywords 表示需要响应的关键词，类型为任意可迭代对象，元素类型为 str
 # 如果不传入 keywords，则响应所有没有被当作命令处理的消息
-@on_natural_language(keywords={'查宝箱'},only_to_me=False)
+@on_natural_language(keywords={'查宝箱','宝箱查询'},only_to_me=True)
 async def _(session: NLPSession):
     # 返回意图命令，前两个参数必填，分别表示置信度和意图命令名
     return IntentCommand(87.0, 'nextchest')

@@ -68,3 +68,15 @@ class AiPlat(object):
         sign_str = genSignString(self.data)
         setParams(self.data, 'sign', sign_str)
         return self.invoke(self.data)
+    
+    def getNlpTextTrans(self, text, type):
+        self.url = url_preffix + 'nlp/nlp_texttrans'
+        setParams(self.data, 'app_id', self.app_id)
+        setParams(self.data, 'app_key', self.app_key)
+        setParams(self.data, 'time_stamp', int(time.time()))
+        setParams(self.data, 'nonce_str', int(time.time()))
+        setParams(self.data, 'text', text)
+        setParams(self.data, 'type', type)
+        sign_str = genSignString(self.data)
+        setParams(self.data, 'sign', sign_str)
+        return self.invoke(self.data)   
