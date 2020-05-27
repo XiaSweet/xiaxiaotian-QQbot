@@ -44,8 +44,10 @@ with open("lib/clashroyale/mykey.txt") as f:
             exit
         elif 400:
             print('ERROR-CR400')
+            exit
         elif 403:
             print('ERROR-CR403')
+            exit
     #超时反馈信息
     except Exception as e:
         print("ERROR-CRTimeOut")

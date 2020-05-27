@@ -16,7 +16,7 @@ SESSION_RUN_TIMEOUT = timedelta(seconds=10)
 DEFAULT_VALIDATION_FAILURE_EXPRESSION = '你发送的内容格式不太对呢，请检查一下再发送哦～'
 DEBUG = False
 #腾讯闲聊不知道如何回答的情况回答库，将会在以下内容内随机挑选一个
-TXCHAT_BAD = (
+TXCHAT_NOANSWER = (
     '你的问题好像有些为难我哦。请换个话题聊聊吧◑﹏◐',
     '问这么深奥的问题你是故意的吧？',
     '我还小，你不能问这么深奥的问题在欺负我╭(╯^╰)╮',

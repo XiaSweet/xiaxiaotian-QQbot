@@ -32,7 +32,7 @@ class AiPlat(object):
         self.url_data = urllib.parse.urlencode(params).encode(encoding='utf-8')
         req = urllib.request.Request(self.url, self.url_data)
         try:
-            rsp = urllib.request.urlopen(req)
+            rsp = urllib.request.urlopen(req)      
             str_rsp = rsp.read()
             dict_rsp = json.loads(str_rsp.decode('utf-8'))
             return dict_rsp

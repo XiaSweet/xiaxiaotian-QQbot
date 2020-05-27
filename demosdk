@@ -1,11 +1,21 @@
+#夏小甜Nonebot开发SDK
+#2020 XiaSweet Lab
+#为了精简的代码和良好的适配性，强烈建议在开发测试完成后删除所有注释行与多余的空格哦
+
+#加载基础组件
 from nonebot import on_command, CommandSession
 from nonebot import on_natural_language, NLPSession, IntentCommand
 #日志记录模块
 import logging
 from nonebot.log import logger
-#加载基础组件
+#加载二级模块
 import subprocess
-# on_command 装饰器将函数声明为一个命令处理器
+#加载配置变量
+from nonebot import get_bot
+#配置变量示例
+#TXCHAT_NOANSWER = get_bot().config.TXCHAT_NOANSWER
+
+# on_command 装饰器将函数声明为一个Nonebot的命令处理器
 # 这里 nextchest 为命令的名字（可为不冲突的任意值），同时允许使用别名「宝箱查询」
 @on_command('nextchest', aliases=('宝箱查询'),only_to_me=False)
 async def nextchest(session: CommandSession):
