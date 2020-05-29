@@ -15,7 +15,8 @@ SESSION_CANCEL_EXPRESSION = (
 SESSION_RUN_TIMEOUT = timedelta(seconds=10)
 DEFAULT_VALIDATION_FAILURE_EXPRESSION = '你发送的内容格式不太对呢，请检查一下再发送哦～'
 DEBUG = False
-#腾讯闲聊不知道如何回答的情况回答库，将会在以下内容内随机挑选一个
+#小管家自有模块配置
+#腾讯闲聊不知道如何回答的情况安排智库，将会在以下内容内随机挑选一个
 TXCHAT_NOANSWER = (
     '你的问题好像有些为难我哦。请换个话题聊聊吧◑﹏◐',
     '问这么深奥的问题你是故意的吧？',
@@ -27,4 +28,8 @@ TXCHAT_NOANSWER = (
     '抱歉哦，我现在的能力还不能明白你在说什么，但我会加油的～',
     '本管家现在不想理你，不接受质疑(︶︿︶)╭∩╮',
 )
+#腾讯AI-API段鉴权配置
+TXAI_APP_ID = '2128916170'
+TXAI_APP_KEY = 'mSTstLFLxSdO6SRp'
+
 #配置文件结束
