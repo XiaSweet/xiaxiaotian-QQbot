@@ -35,7 +35,7 @@ with open("lib/clashroyale/mykey.txt") as f:
                 )           
     #检查HTTP错误，并设置超时机制
     try:            
-        response = urllib.request.urlopen(request,timeout=1.8).read().decode("utf-8")
+        response = urllib.request.urlopen(request,timeout=5).read().decode("utf-8")
     #如果出现HTTP错误
     except urllib.error.HTTPError as e:
         code = (e.code)

@@ -2,6 +2,7 @@ from nonebot.default_config import *
 from datetime import timedelta
 #欢迎进入夏小甜De配置文件夹
 #以下信息为设置小管家的专属文件，如果不清楚设置的内容则不建议精简本行注释代码
+#NONEBOT基础设置
 SUPERUSERS = {1172608638}
 COMMAND_START = {'', '/', '!', '／', '！'}
 NICKNAME = {'小管家', '夏小甜'}

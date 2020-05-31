@@ -6,12 +6,11 @@ import os
 import argparse
 
 #外部函数引入
-parser = argparse.ArgumentParser(description='CR部落战查询程序')
-parser.add_argument('--clantag', '-c', help='填写你的部落Tag，必需')
-parser.add_argument('--usertag','-u',help='你的Tag')
+parser = argparse.ArgumentParser(description='CR查询程序-特殊活动查询')
+parser.add_argument('--usertag','-u',help='你的Tag，必需')
 args = parser.parse_args()
 
-with open("xiaxiaotian/super/clashroyale/mykey.txt") as f:
+with open("lib/clashroyale/mykey.txt") as f:
     mykey=f.read().rstrip("\n")
     
     ssl._create_default_https_context = ssl._create_unverified_context
@@ -20,7 +19,7 @@ with open("xiaxiaotian/super/clashroyale/mykey.txt") as f:
      
     task = "/clans/%23"
 
-    clan = (args.clantag)
+    clan = '88GUJ80'
 
     search = "/currentwar"
     
@@ -31,26 +30,29 @@ with open("xiaxiaotian/super/clashroyale/mykey.txt") as f:
                             "Authorization":"Bearer %s " % mykey
                    }
                 )
-    response = urllib.request.urlopen(request).read().decode("utf-8")
-       
+    response = urllib.request.urlopen(request).read().decode("utf-8") 
     data = json.loads(response)
-
-    #os.system('python3 hello-user.py -t %s ' %(args.usertag))
- 
-    print('你好，部落战排名如下所示：')
-
-    for item in data["clans"]:
-                    war = ("部落Tag:%s,部落名称:%s,部落杯数:%d\n胜利次数:%d次,参战人数:%s人,战斗日已打:%s次" %
+    print('大部落本次部落战排名如下所示：')
+    for item in data["participants"]:
+                    battles = item["battlesPlayed"]
+                    jika = item["collectionDayBattlesPlayed"]
+                    if jika == 3:
+                        jikas = '是'
+                    else:
+                        jikas = '否'
+                    if battles == 1:
+                        zhandou = '是'
+                    else:
+                        zhandou = '否'
+                    war = ("伙伴昵称:%s，伙伴Tag:%s\n战斗日打完次数：%s，集卡日打完次数：%s\n战斗日是否打完：%s，集卡日是否打完：%s" %
                              (
-                                    item["tag"],                                    
-                                    item["name"], 
-                                    item["clanScore"],
-                                    item["wins"],
-                                    item["participants"],
-                                    item["battlesPlayed"]
+                                    item["name"],                                    
+                                    item["tag"], 
+                                    item["battlesPlayed"],
+                                    item["collectionDayBattlesPlayed"],
+                                    zhandou,
+                                    jikas
                                )
                          )
-                    lists = "battlesPlayed"
-#                    a=sorted(lists.items(),key=lambda e:e[1],reverse=True)  //j技术还是不到家，有空还算继续恶补恶补Python吧QaQ
                     print (war)
 
