@@ -10,7 +10,7 @@ parser = argparse.ArgumentParser(description='CR查询程序-特殊活动查询'
 parser.add_argument('--usertag','-u',help='你的Tag，必需')
 args = parser.parse_args()
 
-with open("../mykey.txt") as f:
+with open("lib/clashroyale/mykey.txt") as f:
     mykey=f.read().rstrip("\n")
     ssl._create_default_https_context = ssl._create_unverified_context
     base_url = "https://api.clashroyale.com/v1"
