@@ -7,25 +7,18 @@ import os
 import argparse
 
 #外部函数引入
-parser = argparse.ArgumentParser(description='CR查询程序')
-parser.add_argument('--usertag','-u',help='你的Tag')
+parser = argparse.ArgumentParser(description='荒野查询程序')
+parser.add_argument('--usertag','-u',help='部落TAG')
 args = parser.parse_args()
 
 with open("mykey.txt") as f:
     mykey=f.read().rstrip("\n")
-    
     ssl._create_default_https_context = ssl._create_unverified_context
-    
-    base_url = "https://api.clashroyale.com/v1"
-     
-    endpoint = "/players/%23"
-
-    tag = (args.usertag)
-
-    
+    base_url = "https://api.brawlstars.com/v1"
+    endpoint = "/clubs/%238g0lj0/members"
     #请求调取官方数据库   
     request = urllib.request.Request(
-                   base_url+endpoint+tag,
+                   base_url+endpoint,
                    None,
               {
                             "Authorization":"Bearer %s" % mykey
