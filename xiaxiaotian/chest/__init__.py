@@ -4,10 +4,14 @@ from .data_source import get_nextchest_of_tag
 import logging
 from nonebot.log import logger
 import re
+from nonebot.helpers import render_expression as expr
+import sys
+sys.path.append("lib/smartxxt")
+import systemre as e
 @on_command('nextchest', aliases=('宝箱查询'),only_to_me=False)
 async def nextchest(session: CommandSession):
     tag = session.get('tag', prompt='收到，请回复您的游戏TAG哦。',at_sender=True,only_to_me=True)
-    #await session.send('受网络影响查询时间可能较长，请稍候哦')
+    await session.send(expr(e.SYSTEM_WAITING))
     nextchest_report = await get_nextchest_of_tag(tag)
     await session.send(nextchest_report,at_sender=True)
     logger.info('[宝箱查询]结果已反馈用户,任务结束')

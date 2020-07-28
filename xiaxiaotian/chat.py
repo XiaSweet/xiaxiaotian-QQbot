@@ -3,18 +3,19 @@ from nonebot import on_natural_language, NLPSession, IntentCommand
 from nonebot.helpers import context_id, render_expression as expr
 from nonebot import get_bot
 from nonebot.log import logger
-
 import optparse
 import time
 import json
 import ssl
-import subprocess
 import logging
-
-TXCHAT_NOANSWER = get_bot().config.TXCHAT_NOANSWER
+#智库初始化
+import sys
+sys.path.append("lib/smartxxt")
+sys.path.append("lib/txai_chat")
+from chat import *
+import smartlib as e
 TXAI_APP_ID = get_bot().config.TXAI_APP_ID
 TXAI_APP_KEY = get_bot().config.TXAI_APP_KEY
-
 @on_command('aichat',only_to_me=True)
 async def aichat(session: CommandSession):
     chat = session.state.get('chat')
@@ -23,7 +24,7 @@ async def aichat(session: CommandSession):
     if aichat_re == 'ERROR4':
         logger.info('[腾讯闲聊]出现意外了:腾讯端还不会回答用户的问题，代码:4 - TXAI-16394')
         logger.info('[腾讯闲聊]向用户告知不会回答并结束')
-        await session.send(expr(TXCHAT_NOANSWER),at_sender=True)
+        await session.send(expr(e.TXCHAT_NOANSWER),at_sender=True)
     elif aichat_re == 'ERROR6':
         logger.info('[腾讯闲聊]出现错误了:代码:6 - TXAI-YourNetworkBad')
         logger.debug('[腾讯闲聊]小提醒：腾讯端网络堵塞，请重新触发即可')
@@ -46,7 +47,7 @@ async def aichat(session: CommandSession):
 
 async def call_txai_api(chat: str) -> str:
     logger.info('[腾讯闲聊]开始向脚本发送变量并尝试获取回复')
-    hfchat = subprocess.getoutput("python3 lib/txai_chat/chat.py -c '%s' -id '%s' -key '%s'"%(chat,TXAI_APP_ID,TXAI_APP_KEY))
+    hfchat = anso(chat,TXAI_APP_ID,TXAI_APP_KEY)
     return f'{hfchat}'
 
 @on_natural_language(keywords=None,only_to_me=True)

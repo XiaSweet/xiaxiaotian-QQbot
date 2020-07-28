@@ -3,9 +3,9 @@ import urllib.request
 import urllib.error
 import json
 import ssl
-import os
 import argparse
 #外部函数引入
+from your import *
 parser = argparse.ArgumentParser(description='CR宝箱查询程序')
 parser.add_argument('--usertag','-u',help='你的Tag')
 args = parser.parse_args()
@@ -46,10 +46,8 @@ with open("lib/clashroyale/mykey.txt") as f:
     #没有出现HTTP错误
     else:   
         data = json.loads(response)
-        #查询相应的用户名称
-        os.system("python3 lib/clashroyale/hello-user.py -t %s"%(args.usertag))
-        #返回正确的用户信息
-        print('以下是您未来可以获得的宝箱Ovo：')
+        #返回相应的用户信息
+        print ('久等了,查询的用户:'+cr_user(tag)+'。\n您未来可获得的宝箱如下Ovo:')
         for item in data ["items"]:
                     chest = ("宝箱位置:+%s,宝箱名称:%s" % (
                                     item["index"], 
