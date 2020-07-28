@@ -25,4 +25,4 @@ SESSION_CANCEL_EXPRESSION = (
     '那夏小甜先不打扰你啦。',
         )
 #版本号，每次准备上传数据时应考虑修改一份
-VERSION = 'V1.9.0 - StoryMoon'
+VERSION = 'V1.6.0 - StoryMoon'
