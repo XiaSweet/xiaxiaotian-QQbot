@@ -3,11 +3,14 @@ from nonebot import on_natural_language, NLPSession, IntentCommand
 import logging
 from nonebot.log import logger
 import subprocess
+from nonebot.helpers import render_expression as expr
+import sys
+sys.path.append("lib/smartxxt")
+import systemre as e
 @on_command('nojuan', aliases=('伸手党查询'),only_to_me=True)
 async def nojuan(session: CommandSession):
     tag = session.get('tag')
-    logger.info('[伸手党查询]用户激活了本组件，尝试理解')
-    await session.send('受网络影响查询时间可能较长，请稍候哦')
+    await session.send(expr(e.SYSTEM_WAITING))
     nojuan_report = await get_nojuan(tag)
     if nojuan == 'ERROR-CR404':
         logger.info('[伸手党查询]查询完毕，官方无此TAG信息')
@@ -43,19 +46,17 @@ async def nojuan(session: CommandSession):
         await session.send(nojuan_report,at_sender=True)
         logger.info('[伸手党查询]结果无错误并已查询完毕并发送给用户,任务结束')
 async def get_nojuan(tag: str) -> str:
-    nojuan = subprocess.getoutput("python3 lib/clashroyale/nojuan.py -c '%s'"%(tag))
+    nojuan = subprocess.getoutput("python3 lib/clashroyale/donationcard/nojuan.py -c '%s'"%(tag))
     return f'{nojuan}'
     #return f'0捐测试功能触发完毕'
 @nojuan.args_parser
 async def _(session: CommandSession):
-    logger.debug('[伸手党查询]开始过滤无效字符')
-    stripped_arg = session.current_arg_text.replace(' ','')
-    stripped_arg = session.current_arg_text.replace('#','')
+    stripped_arg = session.current_arg_text
     logger.debug('[伸手党查询]开始辨别部落代码') 
-    if f'大部落' and f'全部'in  stripped_arg:
+    if stripped_arg.find('大部落' and '全部') > -1:
             logger.info('[伸手党查询]用户查询大部落全部的伸手党成员，作为参数传入并执行查询脚本')
             session.state['tag'] = 'dbl'
-    elif f'小部落'and f'全部' in  stripped_arg:
+    elif stripped_arg.find('小部落' and '全部') > -1:
             logger.info('[伸手党查询]用户查询小部落全部的伸手党成员，作为参数传入并执行查询脚本') 
             session.state['tag'] = 'xbl'
     elif f'大部落' in  stripped_arg:
@@ -69,7 +70,7 @@ async def _(session: CommandSession):
             session.finish('很抱歉，同好会暂未开放，无法查询，敬请谅解(ノへ￣、)')
     elif not session.is_first_run:
                 logger.debug('[伸手党查询]用户二次查询无结果，征求用户意见')
-                if (f'嗯' or f'是' or f'继续' or f'还不' or '可以' or f'需要' or f'好') in stripped_arg:
+                if stripped_arg.find(f'嗯' or f'是' or f'继续' or f'还不' or '可以' or f'需要' or f'好') > -1 :
                     logger.debug('[伸手党查询]用户希望继续查询，重置指令')
                     session.pause('请告诉我你想查询的部落等我消息吧')                    
                 else:
