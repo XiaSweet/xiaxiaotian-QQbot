@@ -19,7 +19,7 @@ elif request == "ERROR-CRTimeOut":
 elif request == "ERROR-CRNotCallMe":
             print("ERROR-CRNotCallMe")
 else:
-    print ('久等了,查询的用户:'+cr_user(tag)+'。\n您未来可获得的宝箱如下Ovo:')
+    print ('久等了,查询的用户 :'+cr_user(tag)+'\n您未来可获得的宝箱如下Ovo:')
     for item in request ["items"]:
                     chest = ("宝箱位置:+%s,宝箱名称:%s" % (
                                     item["index"], 

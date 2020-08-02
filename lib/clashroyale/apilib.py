@@ -32,10 +32,10 @@ def crapi(menu,tag,menu2):
                 data = 403
         #超时反馈信息
         except Exception as e:
-            data = ("ERROR-CRTimeOut")
+            data = ("CRTimeOut")
         #如果出现中文
         except UnicodeEncodeError:
-            data = ("ERROR-CRNotCallMe")
+            data = ("CRNotCallMe")
         else:
             data = json.loads(response)
     return data
